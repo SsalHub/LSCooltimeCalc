@@ -6,14 +6,17 @@ def onSubmit(event=None):
     try:
         grow = float(grow_entry.get())
         cooldown = float(cooldown_entry.get())
-        if 0 < default_cooldown:
-            default_cooldown = (default_cooldown + cooldownCalc.getCooldown(grow, cooldown)) / 2
+        if 0 < accum:
+            default_cooldown = (default_cooldown + cooldownCalc.getDefaultCooldown(grow, cooldown)) / 2
         else:
             default_cooldown = cooldownCalc.getDefaultCooldown(grow, cooldown)
         accum += 1
-        result_label.configure(text=f"기준 쿨타임 : {default_cooldown} (누적 연산 {accum}회차)")
+        result_label.configure(text=f"기준 쿨타임 : {round(default_cooldown, 2)} (누적 연산 {accum}회차)")
     except ValueError:
         result_label.configure(text="잘못된 입력입니다.")
+    grow_entry.delete(0, 'end')
+    cooldown_entry.delete(0, 'end')
+    grow_entry.focus_set()  # 엔터 입력 후 육성수치 입력창에 포커스
 
 def onClear():
     global default_cooldown, accum
@@ -26,7 +29,7 @@ def onClear():
 app = ctk.CTk()
 app.geometry("600x200")
 default_cooldown = 0.0
-accum= 0
+accum = 0
 
 main_frame = ctk.CTkFrame(app)
 main_frame.pack(side="left", fill="both", expand=True)
