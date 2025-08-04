@@ -7,7 +7,7 @@ def onSubmit(event=None):
         grow = float(grow_entry.get())
         cooldown = float(cooldown_entry.get())
         if 0 < default_cooldown:
-            default_cooldown = (default_cooldown + cooldownCalc.getCooldown(grow, default_cooldown)) / 2
+            default_cooldown = (default_cooldown + cooldownCalc.getCooldown(grow, cooldown)) / 2
         else:
             default_cooldown = cooldownCalc.getDefaultCooldown(grow, cooldown)
         accum += 1
