@@ -10,7 +10,7 @@ def getDefaultCooldown(grow, cooldown):
         pow += 1
     p = math.pow(2, pow)
     weight *= math.pow((p - 1) / p, grow / 100)
-    return cooldown / weight
+    return round(cooldown / weight, 2)
 
 def getCooldown(grow, C0):
     # C0 : 기본 쿨타임 (육성 0 기준)
